@@ -20,7 +20,7 @@ class TaskType(models.Model):
 class Position(models.Model):
     name = models.CharField(
         max_length=50,
-        unique=True
+        unique=True,
     )
 
     class Meta:
@@ -36,7 +36,8 @@ class Worker(AbstractUser):
         Position,
         blank=True,
         related_name="workers",
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,
     )
 
     class Meta:
