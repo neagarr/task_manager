@@ -4,7 +4,10 @@ from django.db import models
 
 
 class TaskType(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(
+        max_length=50,
+        unique=True
+    )
 
     class Meta:
         ordering = ("name",)
@@ -14,7 +17,27 @@ class TaskType(models.Model):
         return self.name
 
 
+class Position(models.Model):
+    name = models.CharField(
+        max_length=50,
+        unique=True
+    )
+
+    class Meta:
+        ordering = ("name",)
+        verbose_name = "Position"
+
+    def __str__(self):
+        return self.name
+
+
 class Worker(AbstractUser):
+    position = models.ForeignKey(
+        Position,
+        blank=True,
+        related_name="workers",
+        on_delete=models.CASCADE
+    )
 
     class Meta:
         ordering = ("username",)
@@ -22,13 +45,26 @@ class Worker(AbstractUser):
 
 
 class Task(models.Model):
-    name = models.CharField(max_length=50)
+    PRIORITY_CHOICES = [
+        ("Urgent", "Urgent"),
+        ("High", "High"),
+        ("Medium", "Medium"),
+        ("Low", "Low"),
+    ]
+
+    name = models.CharField(max_length=60)
     description = models.TextField()
     deadline = models.DateField()
     is_complete = models.BooleanField(default=False)
-    priority = models.IntegerField(default=0)
-    task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
-    assignees = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="tasks")
+    priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES)
+    task_type = models.ForeignKey(
+        TaskType,
+        on_delete=models.CASCADE
+    )
+    assignees = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="tasks"
+    )
 
     class Meta:
         ordering = ("deadline",)
