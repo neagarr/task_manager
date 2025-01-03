@@ -44,6 +44,9 @@ class Worker(AbstractUser):
         ordering = ("username",)
         verbose_name = "Worker"
 
+    def __str__(self):
+        return f"{self.position}: {self.username} ({self.first_name} {self.last_name})"
+
 
 class Task(models.Model):
     PRIORITY_CHOICES = [
