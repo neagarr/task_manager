@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}
+    <title>TaskManager</title>
+  {% endblock %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      {% block sidebar %}
+        <ul>
+          <li>
+            <a href="{% url 'manager:index' %}">Home</a>
+          </li>
+          <li>
+            <a href='#'>All positions</a>
+          </li>
+          <li>
+            <a href='#'>All workers</a>
+          </li>
+          <li>
+            <a href='#'>All tasks</a>
+          </li>
+          <li>
+            <a href='#'>All task types</a>
+          </li>
+        </ul>
+      {% endblock %}
+    </div>
+    <div class="col-sm-9">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </div>
+</div>
+</body>
+</html>
