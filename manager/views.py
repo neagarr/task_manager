@@ -12,7 +12,6 @@ def index(request: HttpRequest) -> HttpResponse:
         "num_workers": num_workers,
         "num_tasks": num_tasks,
     }
-
     return render(request, "manager/index.html", context=context)
 
 
@@ -22,10 +21,7 @@ class TaskTypeListView(generic.ListView):
     context_object_name = "task_type_list"
 
 
-# def task_type_list_view(request: HttpRequest) -> HttpResponse:
-#     task_type_list = TaskType.objects.all()
-#     context = {
-#         "task_type_list": task_type_list,
-#     }
-#
-#     return render(request, "manager/task_type_list.html", context=context)
+class TaskListView(generic.ListView):
+    model = Task
+    template_name = "manager/task_list.html"
+    context_object_name = "task_list"
