@@ -5,9 +5,13 @@
   {% if task_list %}
     <ul>
       {% for task in task_list %}
-        <li>{{ task.name }}</li>
+        <li>
+          <a href="#">
+            {{ task.is_complete }}-complition: "{{ task.name }}", ({{ task.deadline }}/ {{ task.priority }})
+          </a>
+        </li>
       {% endfor %}
-    </ul>
+    </ul> 
   {% else %}
       <p>There are no tasks in Manager</p>
   {% endif %}
