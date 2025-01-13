@@ -25,6 +25,7 @@ class TaskListView(generic.ListView):
     model = Task
     template_name = "manager/task_list.html"
     context_object_name = "task_list"
+    queryset = Task.objects.select_related("type")
 
 
 class PositionListView(generic.ListView):

@@ -5,8 +5,8 @@ from manager.models import *
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ("is_complete", "deadline", "priority", "task_type", "name", "description")
-    list_filter = ("is_complete", "deadline", "priority", "task_type")
+    list_display = ("is_complete", "deadline", "priority", "type", "name", "description")
+    list_filter = ("is_complete", "deadline", "priority", "type")
     search_fields = ("name", "description")
 
 

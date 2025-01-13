@@ -7,7 +7,7 @@
       {% for task in task_list %}
         <li>
           <a href="#">
-            {{ task.is_complete }}-complition: "{{ task.name }}", ({{ task.deadline }}/ {{ task.priority }})
+            {{ task.is_complete }}-complition: {{ task.type }} "{{ task.name }}", ({{ task.deadline }}/ {{ task.priority }})
           </a>
         </li>
       {% endfor %}
