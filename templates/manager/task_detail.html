@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Title: {{ task.name }}</h1>
+  <p>Daedline: {{ task.deadline }}</p>
+  <p>Type: {{ task.type }}</p>
+  <p>Details: {{ task.description }}</p>
+  <div class="ml-3">
+    <h1>Workers:</h1>
+    {% for worker in task.assignees.all %}
+      <hr>
+      <p class="text-muted">{{ worker.username }}</p>
+      <p>{{ worker.first_name }} {{ worker.last_name }}</p>
+      {% if worker.position %}
+        <p>{{ worker.position }}</p>
+      {% endif %}
+    {% empty %}
+      <p>No workers for this task!</p>
+    {% endfor %}
+
+  </div>
+{% endblock %}

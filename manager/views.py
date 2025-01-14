@@ -28,6 +28,14 @@ class TaskListView(generic.ListView):
     queryset = Task.objects.select_related("type")
 
 
+def task_detail_view(request, pk: int) -> HttpResponse:
+    task = Task.objects.select_related("type").get(pk=pk)
+    context = {
+        "task": task,
+    }
+    return render(request, "manager/task_detail.html", context=context)
+
+
 class PositionListView(generic.ListView):
     model = Position
     template_name = "manager/position_list.html"

@@ -6,7 +6,7 @@
     <ul>
       {% for task in task_list %}
         <li>
-          <a href="#">
+          <a href="{% url 'manager:task_detail' task.id %}">
             {{ task.is_complete }}-complition: {{ task.type }} "{{ task.name }}", ({{ task.deadline }}/ {{ task.priority }})
           </a>
         </li>
