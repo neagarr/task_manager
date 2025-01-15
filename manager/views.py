@@ -8,7 +8,10 @@ from .models import Worker, Task, TaskType, Position
 def index(request: HttpRequest) -> HttpResponse:
     num_workers = Worker.objects.count()
     num_tasks = Task.objects.count()
+    num_visits = request.session.get("num_visits", 0)
+    request.session["num_visits"] = num_visits + 1
     context = {
+        "num_visits": num_visits,
         "num_workers": num_workers,
         "num_tasks": num_tasks,
     }
@@ -32,6 +35,7 @@ class TaskListView(generic.ListView):
 
 class TaskDetailView(generic.DetailView):
     model = Task
+    template_name = "manager/task_detail.html"
 
 
 class PositionListView(generic.ListView):
