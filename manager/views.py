@@ -49,5 +49,11 @@ class WorkerListView(generic.ListView):
     model = Worker
     template_name = "manager/worker_list.html"
     context_object_name = "worker_list"
+    queryset = Worker.objects.select_related("position")
     paginate_by = 2
+
+
+class WorkerDetailView(generic.DetailView):
+    model = Worker
+    template_name = "manager/worker_detail.html"
 

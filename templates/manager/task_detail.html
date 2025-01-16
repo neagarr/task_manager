@@ -9,7 +9,9 @@
     <h1>Workers:</h1>
     {% for worker in task.assignees.all %}
       <hr>
-      <p class="text-muted">{{ worker.username }}</p>
+      <p class="text-muted">
+        <a href="{% url 'manager:worker_detail' worker.id %}">{{ worker.username }}</a>
+      </p>
       <p>{{ worker.first_name }} {{ worker.last_name }}</p>
       {% if worker.position %}
         <p>{{ worker.position }}</p>
