@@ -1,10 +1,13 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 
 from .models import Worker, Task, TaskType, Position
 
 
+@login_required()
 def index(request: HttpRequest) -> HttpResponse:
     num_workers = Worker.objects.count()
     num_tasks = Task.objects.count()
@@ -18,14 +21,14 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, "manager/index.html", context=context)
 
 
-class TaskTypeListView(generic.ListView):
+class TaskTypeListView(LoginRequiredMixin, generic.ListView):
     model = TaskType
     template_name = "manager/task_type_list.html"
     context_object_name = "task_type_list"
     paginate_by = 2
 
 
-class TaskListView(generic.ListView):
+class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "manager/task_list.html"
     context_object_name = "task_list"
@@ -33,19 +36,19 @@ class TaskListView(generic.ListView):
     paginate_by = 2
 
 
-class TaskDetailView(generic.DetailView):
+class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
     template_name = "manager/task_detail.html"
 
 
-class PositionListView(generic.ListView):
+class PositionListView(LoginRequiredMixin, generic.ListView):
     model = Position
     template_name = "manager/position_list.html"
     context_object_name = "position_list"
     paginate_by = 2
 
 
-class WorkerListView(generic.ListView):
+class WorkerListView(LoginRequiredMixin, generic.ListView):
     model = Worker
     template_name = "manager/worker_list.html"
     context_object_name = "worker_list"
@@ -53,7 +56,7 @@ class WorkerListView(generic.ListView):
     paginate_by = 2
 
 
-class WorkerDetailView(generic.DetailView):
+class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
     template_name = "manager/worker_detail.html"
 
