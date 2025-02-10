@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 
@@ -26,6 +27,13 @@ class TaskTypeListView(LoginRequiredMixin, generic.ListView):
     template_name = "manager/task_type_list.html"
     context_object_name = "task_type_list"
     paginate_by = 2
+
+
+class TaskTypeCreateView(LoginRequiredMixin, generic.CreateView):
+    model = TaskType
+    fields = "__all__"
+    success_url = reverse_lazy("manager:task_type_list")
+    template_name = "manager/task_type_form.html"
 
 
 class TaskListView(LoginRequiredMixin, generic.ListView):
