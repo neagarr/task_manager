@@ -49,6 +49,13 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "manager/task_detail.html"
 
 
+class TaskCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Task
+    fields = "__all__"
+    success_url = reverse_lazy("manager:task_list")
+    template_name = "manager/task_form.html"
+
+
 class PositionListView(LoginRequiredMixin, generic.ListView):
     model = Position
     template_name = "manager/position_list.html"
@@ -74,4 +81,3 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
     template_name = "manager/worker_detail.html"
-
