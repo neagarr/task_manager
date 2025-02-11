@@ -6,11 +6,22 @@
     <a style="float: right" href={% url "manager:position_create" %}>+</a>
   </h1>
   {% if position_list %}
-    <ul>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
       {% for position in position_list %}
-        <li>{{ position.name }}</li>
+        <tr>
+          <td>{{ position.id }}</td>
+          <td>{{ position.name }}</td>
+          <td><a href={% url "manager:position_update" pk=position.id %}>UPDATE</a></td>
+          <td><a href={% url "manager:position_delete" pk=position.id %}>DELETE</a></td>
+        </tr>
       {% endfor %}
-    </ul>
+    </table>
   {% else %}
       <p>There are no positions in Manager</p>
   {% endif %}

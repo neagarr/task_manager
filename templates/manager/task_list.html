@@ -6,15 +6,22 @@
     <a style="float: right" href={% url "manager:task_create" %}>+</a>
   </h1>
   {% if task_list %}
-    <ul>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
       {% for task in task_list %}
-        <li>
-          <a href="{% url 'manager:task_detail' task.id %}">
-            {{ task.is_complete }}-complition: {{ task.type }} "{{ task.name }}", ({{ task.deadline }}/ {{ task.priority }})
-          </a>
-        </li>
+        <tr>
+          <td>{{ task.id }}</td>
+          <td>{{ task.name }}</td>
+          <td><a href={% url "manager:task_update" pk=task.id %}>UPDATE</a></td>
+          <td><a href={% url "manager:task_delete" pk=task.id %}>DELETE</a></td>
+        </tr>
       {% endfor %}
-    </ul> 
+    </table>
   {% else %}
       <p>There are no tasks in Manager</p>
   {% endif %}
