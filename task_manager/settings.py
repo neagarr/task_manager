@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "debug_toolbar",
     "manager",
+    "crispy_forms",
+    "crispy_bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,5 @@ LOGIN_REDIRECT_URL = "/manager/"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
