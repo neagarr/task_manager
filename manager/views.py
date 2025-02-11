@@ -43,6 +43,12 @@ class TaskTypeUpdateView(LoginRequiredMixin, generic.UpdateView):
     template_name = "manager/task_type_form.html"
 
 
+class TaskTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = TaskType
+    template_name = "manager/task_type_confirm_delete.html"
+    success_url = reverse_lazy("manager:task_type_list")
+
+
 class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "manager/task_list.html"
@@ -70,6 +76,12 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     template_name = "manager/task_form.html"
 
 
+class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Task
+    success_url = reverse_lazy("manager:task_list")
+    template_name = "manager/task_confirm_delete.html"
+
+
 class PositionListView(LoginRequiredMixin, generic.ListView):
     model = Position
     template_name = "manager/position_list.html"
@@ -89,6 +101,12 @@ class PositionUpdateView(LoginRequiredMixin, generic.UpdateView):
     fields = "__all__"
     success_url = reverse_lazy("manager:position_list")
     template_name = "manager/position_form.html"
+
+
+class PositionDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Position
+    success_url = reverse_lazy("manager:position_list")
+    template_name = "manager/position_confirm_delete.html"
 
 
 class WorkerListView(LoginRequiredMixin, generic.ListView):
