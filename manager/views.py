@@ -127,4 +127,4 @@ class WorkerCreateView(generic.CreateView):
     model = Worker
     form_class = WorkerCreationForm
     template_name = "manager/worker_form.html"
-    success_url = reverse_lazy("manager:index")
+    success_url = reverse_lazy("login")
