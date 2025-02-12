@@ -16,7 +16,8 @@ from manager.views import (
     PositionDeleteView,
     WorkerListView,
     WorkerDetailView,
-    WorkerCreateView,
+    # WorkerCreateView,
+    register,
 )
 
 
@@ -37,7 +38,7 @@ urlpatterns = [
     path("positions/<int:pk>/delete/", PositionDeleteView.as_view(), name="position_delete"),
     path("workers/", WorkerListView.as_view(), name="worker_list"),
     path("workers/<int:pk>/", WorkerDetailView.as_view(), name="worker_detail"),
-    path("workers/create/", WorkerCreateView.as_view(), name="worker_create"),
+    path("workers/register/", register, name="worker_register"),
 ]
 
 app_name = "manager"
