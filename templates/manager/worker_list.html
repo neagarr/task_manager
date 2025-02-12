@@ -1,20 +1,46 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
   <h1>
     Workers List
   </h1>
+  <form method="get" action="" class="form-inline">
+    {{ search_form|crispy }}
+    <input type="submit" value="🔍" class="btn btn-secondary">
+  </form>
+  <br>
   {% if worker_list %}
-    <ul>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Position</th>
+        <th>Tasks</th>
+      </tr>
       {% for worker in worker_list %}
-        <li>
-          <a href="{% url 'manager:worker_detail' worker.id %}">{{ worker.username }}</a>
-          <p>{{ worker.first_name }} {{ worker.last_name }}</p>
-          <p>{{ worker.position }}</p>
-          
-        </li>
+        <tr>
+          <td>
+            <a href="{% url 'manager:worker_detail' worker.id %}">{{ worker.id }}</a>
+          </td>
+          <td>{{ worker.username }}</td>
+          <td>{{worker.position}}</td>
+          <td>
+            {% if worker.tasks.all %}
+              <ol>
+                {% for task in worker.tasks.all %}
+                  <li>
+                    <a href="{% url 'manager:task_detail' task.id %}">{{ task.name }}</a>
+                  </li>
+                {% empty %}
+                  <p>No tasks for this worker!</p>
+                {% endfor %}
+              </ol>
+            {% endif %}
+          </td>
+        </tr>
       {% endfor %}
-    </ul> 
+    </table>
   {% else %}
       <p>There are no workers in Manager</p>
   {% endif %}
