@@ -16,7 +16,6 @@ from manager.views import (
     PositionDeleteView,
     WorkerListView,
     WorkerDetailView,
-    # WorkerCreateView,
     register,
 )
 

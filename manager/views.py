@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 
-from .forms import WorkerRegistrationForm
+from .forms import WorkerRegistrationForm, TaskForm
 from .models import Worker, Task, TaskType, Position
 
 
@@ -67,16 +67,16 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
-    fields = "__all__"
     success_url = reverse_lazy("manager:task_list")
     template_name = "manager/task_form.html"
+    form_class = TaskForm
 
 
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
-    fields = "__all__"
     success_url = reverse_lazy("manager:task_list")
     template_name = "manager/task_form.html"
+    form_class = TaskForm
 
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
