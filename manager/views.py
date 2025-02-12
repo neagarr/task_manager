@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 
+from .forms import WorkerCreationForm
 from .models import Worker, Task, TaskType, Position
 
 
@@ -120,3 +121,10 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
     template_name = "manager/worker_detail.html"
+
+
+class WorkerCreateView(generic.CreateView):
+    model = Worker
+    form_class = WorkerCreationForm
+    template_name = "manager/worker_form.html"
+    success_url = reverse_lazy("manager:index")
