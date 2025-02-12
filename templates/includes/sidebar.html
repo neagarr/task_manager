@@ -11,6 +11,9 @@
     </li>
   {% else %}
     <li>
+      <a href="{% url 'manager:worker_create' %}">Registration</a>
+    </li>
+    <li>
       <a href="{% url 'login' %}">Login</a>
     </li>
   {% endif %}
