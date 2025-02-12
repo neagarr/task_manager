@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 {% block content %}
-{#  {% if request.headers.referer  == "http://localhost:8000/manager/workers/create/" %}#}
-{#  <h4>Registration Complete</h4>#}
-{#  {% endif %}#}
   <h1>Login</h1>
   {% if form.errors %}
     <p style="color: red">Invalid credentials</p>
