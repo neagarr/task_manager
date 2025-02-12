@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Workers List</h1>
+  <h1>
+    Workers List
+  </h1>
   {% if worker_list %}
     <ul>
       {% for worker in worker_list %}
         <li>
-{#          <a href="{% url 'manager:task_detail' task.id %}">#}
           <a href="{% url 'manager:worker_detail' worker.id %}">{{ worker.username }}</a>
           <p>{{ worker.first_name }} {{ worker.last_name }}</p>
           <p>{{ worker.position }}</p>
