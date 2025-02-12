@@ -1,11 +1,13 @@
+from django.contrib import messages
+from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpRequest
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 
-from .forms import WorkerCreationForm
+from .forms import WorkerRegistrationForm
 from .models import Worker, Task, TaskType, Position
 
 
@@ -123,8 +125,18 @@ class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "manager/worker_detail.html"
 
 
-class WorkerCreateView(generic.CreateView):
-    model = Worker
-    form_class = WorkerCreationForm
-    template_name = "manager/worker_form.html"
-    success_url = reverse_lazy("login")
+def register(request):
+    if request.method == "GET":
+        form = WorkerRegistrationForm()
+        return render(request, "manager/worker_form.html", {'form': form})
+    if request.method == 'POST':
+        form = WorkerRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            messages.success(request, "You have registered successfully.")
+            login(request, user)
+            return redirect("manager:index")
+        else:
+            return render(request, "manager/worker_form.html", {'form': form})
