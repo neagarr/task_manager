@@ -8,6 +8,7 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 
 from .forms import WorkerRegistrationForm, TaskForm, SearchForm
+from .mixins import QuerysetMixin
 from .models import Worker, Task, TaskType, Position
 
 
@@ -25,9 +26,8 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, "manager/index.html", context=context)
 
 
-class TaskTypeListView(LoginRequiredMixin, generic.ListView):
+class TaskTypeListView(LoginRequiredMixin, QuerysetMixin, generic.ListView):
     model = TaskType
-    queryset = TaskType.objects.all()
     template_name = "manager/task_type_list.html"
     context_object_name = "task_type_list"
     paginate_by = 2
@@ -42,10 +42,8 @@ class TaskTypeListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        title = self.request.GET.get("title")
-        if title:
-            return self.queryset.filter(name__icontains=title)
-        return self.queryset
+        queryset = TaskType.objects.all()
+        return self.get_queryset_mixin(queryset)
 
 
 class TaskTypeCreateView(LoginRequiredMixin, generic.CreateView):
@@ -68,11 +66,10 @@ class TaskTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("manager:task_type_list")
 
 
-class TaskListView(LoginRequiredMixin, generic.ListView):
+class TaskListView(LoginRequiredMixin, QuerysetMixin, generic.ListView):
     model = Task
     template_name = "manager/task_list.html"
     context_object_name = "task_list"
-    queryset = Task.objects.select_related("type")
     paginate_by = 2
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -85,10 +82,8 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        title = self.request.GET.get("title")
-        if title:
-            return self.queryset.filter(name__icontains=title)
-        return self.queryset
+        queryset = Task.objects.select_related("type")
+        return self.get_queryset_mixin(queryset)
 
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
@@ -116,9 +111,8 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     template_name = "manager/task_confirm_delete.html"
 
 
-class PositionListView(LoginRequiredMixin, generic.ListView):
+class PositionListView(LoginRequiredMixin, QuerysetMixin, generic.ListView):
     model = Position
-    queryset = Position.objects.all()
     template_name = "manager/position_list.html"
     context_object_name = "position_list"
     paginate_by = 2
@@ -133,10 +127,8 @@ class PositionListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        title = self.request.GET.get("title")
-        if title:
-            return self.queryset.filter(name__icontains=title)
-        return self.queryset
+        queryset = Position.objects.all()
+        return self.get_queryset_mixin(queryset)
 
 
 class PositionCreateView(LoginRequiredMixin, generic.CreateView):
@@ -159,11 +151,10 @@ class PositionDeleteView(LoginRequiredMixin, generic.DeleteView):
     template_name = "manager/position_confirm_delete.html"
 
 
-class WorkerListView(LoginRequiredMixin, generic.ListView):
+class WorkerListView(LoginRequiredMixin, QuerysetMixin, generic.ListView):
     model = Worker
     template_name = "manager/worker_list.html"
     context_object_name = "worker_list"
-    queryset = Worker.objects.select_related("position")
     paginate_by = 2
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -176,10 +167,8 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        title = self.request.GET.get("title")
-        if title:
-            return self.queryset.filter(username__icontains=title)
-        return self.queryset
+        queryset = Worker.objects.select_related("position")
+        return self.get_queryset_mixin(queryset)
 
 
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
