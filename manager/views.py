@@ -7,8 +7,8 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 
-from .forms import WorkerRegistrationForm, TaskForm, SearchForm
-from .mixins import QuerysetMixin
+from .forms import WorkerRegistrationForm, TaskForm
+from .mixins import QuerysetMixin, ContextMixin
 from .models import Worker, Task, TaskType, Position
 
 
@@ -26,7 +26,7 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, "manager/index.html", context=context)
 
 
-class TaskTypeListView(LoginRequiredMixin, QuerysetMixin, generic.ListView):
+class TaskTypeListView(LoginRequiredMixin, QuerysetMixin, ContextMixin, generic.ListView):
     model = TaskType
     template_name = "manager/task_type_list.html"
     context_object_name = "task_type_list"
@@ -34,12 +34,7 @@ class TaskTypeListView(LoginRequiredMixin, QuerysetMixin, generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TaskTypeListView, self).get_context_data(**kwargs)
-        title = self.request.GET.get("title", "")
-        context["title"] = title
-        context["search_form"] = SearchForm(
-            initial={"title": title}
-        )
-        return context
+        return self.get_context_data_mixin(context)
 
     def get_queryset(self):
         queryset = TaskType.objects.all()
@@ -66,7 +61,7 @@ class TaskTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("manager:task_type_list")
 
 
-class TaskListView(LoginRequiredMixin, QuerysetMixin, generic.ListView):
+class TaskListView(LoginRequiredMixin, QuerysetMixin, ContextMixin, generic.ListView):
     model = Task
     template_name = "manager/task_list.html"
     context_object_name = "task_list"
@@ -74,12 +69,7 @@ class TaskListView(LoginRequiredMixin, QuerysetMixin, generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
-        title = self.request.GET.get("title", "")
-        context["title"] = title
-        context["search_form"] = SearchForm(
-            initial={"title": title}
-        )
-        return context
+        return self.get_context_data_mixin(context)
 
     def get_queryset(self):
         queryset = Task.objects.select_related("type")
@@ -111,7 +101,7 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     template_name = "manager/task_confirm_delete.html"
 
 
-class PositionListView(LoginRequiredMixin, QuerysetMixin, generic.ListView):
+class PositionListView(LoginRequiredMixin, QuerysetMixin, ContextMixin, generic.ListView):
     model = Position
     template_name = "manager/position_list.html"
     context_object_name = "position_list"
@@ -119,12 +109,7 @@ class PositionListView(LoginRequiredMixin, QuerysetMixin, generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(PositionListView, self).get_context_data(**kwargs)
-        title = self.request.GET.get("title", "")
-        context["title"] = title
-        context["search_form"] = SearchForm(
-            initial={"title": title}
-        )
-        return context
+        return self.get_context_data_mixin(context)
 
     def get_queryset(self):
         queryset = Position.objects.all()
@@ -151,7 +136,7 @@ class PositionDeleteView(LoginRequiredMixin, generic.DeleteView):
     template_name = "manager/position_confirm_delete.html"
 
 
-class WorkerListView(LoginRequiredMixin, QuerysetMixin, generic.ListView):
+class WorkerListView(LoginRequiredMixin, QuerysetMixin, ContextMixin, generic.ListView):
     model = Worker
     template_name = "manager/worker_list.html"
     context_object_name = "worker_list"
@@ -159,12 +144,7 @@ class WorkerListView(LoginRequiredMixin, QuerysetMixin, generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(WorkerListView, self).get_context_data(**kwargs)
-        title = self.request.GET.get("title", "")
-        context["title"] = title
-        context["search_form"] = SearchForm(
-            initial={"title": title}
-        )
-        return context
+        return self.get_context_data_mixin(context)
 
     def get_queryset(self):
         queryset = Worker.objects.select_related("position")
