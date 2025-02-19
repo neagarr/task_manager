@@ -2,10 +2,10 @@
 
 {% block content %}
   <h1>Username: {{ worker.username }}</h1>
-  <p>Position: {{ worker.position }}</p>
+  <h3>Position: {{ worker.position }}</h3>
   <p>{{ worker.first_name }} {{ worker.last_name }}</p>
   <div class="ml-3">
-    <h1>Tasks:</h1>
+    <h2>Tasks:</h2>
     {% for task in worker.tasks.all %}
       <hr>
       <p class="text-muted">
