@@ -20,10 +20,8 @@
       </tr>
       {% for worker in worker_list %}
         <tr>
-          <td>
-            <a href="{% url 'manager:worker_detail' worker.id %}">{{ worker.id }}</a>
-          </td>
-          <td>{{ worker.username }}</td>
+          <td>{{ worker.id }}</td>
+          <td><a href="{% url 'manager:worker_detail' worker.id %}">{{ worker.username }}</a></td>
           <td>{{worker.position}}</td>
           <td>
             {% if worker.tasks.all %}
