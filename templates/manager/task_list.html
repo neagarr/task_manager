@@ -22,7 +22,7 @@
       {% for task in task_list %}
         <tr>
           <td>{{ task.id }}</td>
-          <td>{{ task.name }}</td>
+          <td><a href={% url "manager:task_detail" pk=task.id %}>{{ task.name }}</a></td>
           <td><a href={% url "manager:task_update" pk=task.id %}>UPDATE</a></td>
           <td><a href={% url "manager:task_delete" pk=task.id %}>DELETE</a></td>
         </tr>
