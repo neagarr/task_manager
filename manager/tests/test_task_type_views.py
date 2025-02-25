@@ -9,5 +9,3 @@ class PublicTaskTypeTest(TestCase):
     def test_login_required(self):
         res = self.client.get(TASK_TYPE_LIST_URL)
         self.assertNotEqual(res.status_code, 200)
-
-
