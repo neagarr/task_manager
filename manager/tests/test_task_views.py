@@ -29,3 +29,4 @@ class PublicTaskTest(TestCase):
         url = reverse("manager:task_detail", args=[self.task.id])
         res = self.client.get(url)
         self.assertNotEqual(res.status_code, 200)
+
