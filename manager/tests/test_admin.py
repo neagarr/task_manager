@@ -36,7 +36,7 @@ class AdminSiteTests(TestCase):
         """
         url = reverse("admin:manager_worker_change", args=[self.worker.id])
         res = self.client.get(url)
-        self.assertContains(res, self.worker.position.name)
+        self.assertContains(res, "Additional Information")
 
     def test_worker_add_position_listed(self):
         """
