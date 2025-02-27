@@ -34,3 +34,9 @@ class PrivateTaskTypeTest(TestCase):
             list(task_types),
         )
 
+    def test_create_task_type(self):
+        form_data = {"name": "test task type"}
+        self.client.post(reverse("manager:task_type_create"), form_data)
+        new_task_type = TaskType.objects.get(name="test task type")
+
+        self.assertEqual(new_task_type.name, form_data["name"])
