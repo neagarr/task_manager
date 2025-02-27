@@ -20,9 +20,7 @@ class PrivateTaskTypeTest(TestCase):
             username="test_username",
             password="testpassword",
         )
-        self.task_type = TaskType.objects.create(
-            name="Test Task Type",
-        )
+        self.task_type = TaskType.objects.create(name="Test Task Type", )
         self.client.force_login(self.user)
 
     def test_retrieve_task_type_list(self):
@@ -35,8 +33,20 @@ class PrivateTaskTypeTest(TestCase):
         )
 
     def test_create_task_type(self):
-        form_data = {"name": "test task type"}
+        form_data = {"name": "Test Create"}
         self.client.post(reverse("manager:task_type_create"), form_data)
-        new_task_type = TaskType.objects.get(name="test task type")
+        new_task_type = TaskType.objects.get(name="Test Create")
 
         self.assertEqual(new_task_type.name, form_data["name"])
+
+    def test_update_task_type(self):
+        task_type_id = self.task_type.id
+        form_data = {"name": "Test Update"}
+        self.client.post(reverse("manager:task_type_update", args=[task_type_id]), form_data)
+        self.assertEqual(TaskType.objects.get(id=task_type_id).name, form_data["name"])
+
+    def test_delete_task_type(self):
+        task_type_id = self.task_type.id
+        self.client.post(reverse("manager:task_type_delete", args=[task_type_id]), {})
+        self.assertEqual(TaskType.objects.filter(id=task_type_id).count(), 0)
+
