@@ -49,6 +49,8 @@ class PrivateWorkerTest(TestCase):
         self.assertTemplateUsed(res, "manager/worker_list.html")
 
     def test_retrieve_worker_detail(self):
-        res = self.client.get(reverse("manager:worker_detail", args=[self.worker.id]))
+        res = self.client.get(
+            reverse("manager:worker_detail", args=[self.worker.id])
+        )
         self.assertEqual(res.status_code, 200)
         self.assertTemplateUsed(res, "manager/worker_detail.html")

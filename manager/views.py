@@ -26,7 +26,12 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, "manager/index.html", context=context)
 
 
-class TaskTypeListView(LoginRequiredMixin, QuerysetMixin, ContextMixin, generic.ListView):
+class TaskTypeListView(
+    LoginRequiredMixin,
+    QuerysetMixin,
+    ContextMixin,
+    generic.ListView
+):
     model = TaskType
     template_name = "manager/task_type_list.html"
     context_object_name = "task_type_list"
@@ -61,7 +66,12 @@ class TaskTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("manager:task_type_list")
 
 
-class TaskListView(LoginRequiredMixin, QuerysetMixin, ContextMixin, generic.ListView):
+class TaskListView(
+    LoginRequiredMixin,
+    QuerysetMixin,
+    ContextMixin,
+    generic.ListView
+):
     model = Task
     template_name = "manager/task_list.html"
     context_object_name = "task_list"
@@ -72,7 +82,7 @@ class TaskListView(LoginRequiredMixin, QuerysetMixin, ContextMixin, generic.List
         return self.get_context_data_mixin(context)
 
     def get_queryset(self):
-        queryset = Task.objects.select_related("type")
+        queryset = Task.objects.select_related("type_of_task")
         return self.get_queryset_mixin(queryset)
 
 
@@ -101,7 +111,12 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     template_name = "manager/task_confirm_delete.html"
 
 
-class PositionListView(LoginRequiredMixin, QuerysetMixin, ContextMixin, generic.ListView):
+class PositionListView(
+    LoginRequiredMixin,
+    QuerysetMixin,
+    ContextMixin,
+    generic.ListView
+):
     model = Position
     template_name = "manager/position_list.html"
     context_object_name = "position_list"
@@ -136,11 +151,16 @@ class PositionDeleteView(LoginRequiredMixin, generic.DeleteView):
     template_name = "manager/position_confirm_delete.html"
 
 
-class WorkerListView(LoginRequiredMixin, QuerysetMixin, ContextMixin, generic.ListView):
+class WorkerListView(
+    LoginRequiredMixin,
+    QuerysetMixin,
+    ContextMixin,
+    generic.ListView
+):
     model = Worker
     template_name = "manager/worker_list.html"
     context_object_name = "worker_list"
-    paginate_by = 2
+    paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(WorkerListView, self).get_context_data(**kwargs)

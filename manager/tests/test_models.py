@@ -25,7 +25,8 @@ class ModelTests(TestCase):
         )
         self.assertEqual(
             str(worker),
-            f"{worker.position}: {worker.username} ({worker.first_name} {worker.last_name})"
+            f"{worker.position}: {worker.username} "
+            f"({worker.first_name} {worker.last_name})"
         )
 
     def test_create_worker_with_position(self):
@@ -48,6 +49,6 @@ class ModelTests(TestCase):
             description="test_description",
             deadline=datetime.now(),
             priority="test_priority",
-            type=test_task_type,
+            type_of_task=test_task_type,
         )
         self.assertEqual(str(task), task.name)

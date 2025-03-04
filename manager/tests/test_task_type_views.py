@@ -42,11 +42,19 @@ class PrivateTaskTypeTest(TestCase):
     def test_update_task_type(self):
         task_type_id = self.task_type.id
         form_data = {"name": "Test Update"}
-        self.client.post(reverse("manager:task_type_update", args=[task_type_id]), form_data)
-        self.assertEqual(TaskType.objects.get(id=task_type_id).name, form_data["name"])
+        self.client.post(
+            reverse("manager:task_type_update", args=[task_type_id]),
+            form_data
+        )
+        self.assertEqual(
+            TaskType.objects.get(id=task_type_id).name,
+            form_data["name"]
+        )
 
     def test_delete_task_type(self):
         task_type_id = self.task_type.id
-        self.client.post(reverse("manager:task_type_delete", args=[task_type_id]), {})
+        self.client.post(
+            reverse("manager:task_type_delete", args=[task_type_id]),
+            {}
+        )
         self.assertEqual(TaskType.objects.filter(id=task_type_id).count(), 0)
-

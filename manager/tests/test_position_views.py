@@ -42,10 +42,19 @@ class PrivatePositionTest(TestCase):
     def test_update_position(self):
         position_id = self.position.id
         form_data = {"name": "Test Update"}
-        self.client.post(reverse("manager:position_update", args=[position_id]), form_data)
-        self.assertEqual(Position.objects.get(id=position_id).name, form_data["name"])
+        self.client.post(
+            reverse("manager:position_update", args=[position_id]),
+            form_data
+        )
+        self.assertEqual(
+            Position.objects.get(id=position_id).name,
+            form_data["name"]
+        )
 
     def test_delete_position(self):
         position_id = self.position.id
-        self.client.post(reverse("manager:position_delete", args=[position_id]), {})
+        self.client.post(
+            reverse("manager:position_delete", args=[position_id]),
+            {}
+        )
         self.assertEqual(Position.objects.filter(id=position_id).count(), 0)

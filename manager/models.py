@@ -45,7 +45,8 @@ class Worker(AbstractUser):
         verbose_name = "Worker"
 
     def __str__(self):
-        return f"{self.position}: {self.username} ({self.first_name} {self.last_name})"
+        return (f"{self.position}: {self.username} "
+                f"({self.first_name} {self.last_name})")
 
 
 class Task(models.Model):
@@ -61,7 +62,7 @@ class Task(models.Model):
     deadline = models.DateField()
     is_complete = models.BooleanField(default=False)
     priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES)
-    type = models.ForeignKey(
+    type_of_task = models.ForeignKey(
         TaskType,
         on_delete=models.CASCADE
     )

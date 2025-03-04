@@ -31,12 +31,15 @@ class FormTests(TestCase):
             "deadline": date.today(),
             "is_complete": False,
             "priority": "Urgent",
-            "type": self.test_task_type,
+            "type_of_task": self.test_task_type,
             "assignees": Worker.objects.all(),
         }
         form = TaskForm(data=form_data)
         self.assertTrue(form.is_valid())
-        self.assertEqual(dict(form.cleaned_data["assignees"]), dict(form_data["assignees"]))
+        self.assertEqual(
+            dict(form.cleaned_data["assignees"]),
+            dict(form_data["assignees"])
+        )
         del form.cleaned_data["assignees"]
         del form_data["assignees"]
         self.assertEqual(form.cleaned_data, form_data)
