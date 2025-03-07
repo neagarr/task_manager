@@ -1,39 +1,3 @@
-{#{% extends "base.html" %}#}
-{#{% load crispy_forms_filters %}#}
-{##}
-{#{% block content %}#}
-{#  <h1>#}
-{#    Task Type List#}
-{#    <a style="float: right" href={% url "manager:task_type_create" %}>+</a>#}
-{#  </h1>#}
-{#  <form method="get" action="" class="form-inline">#}
-{#    {{ search_form|crispy }}#}
-{#    <input type="submit" value="🔍" class="btn btn-secondary">#}
-{#  </form>#}
-{#  <br>#}
-{#  {% if task_type_list %}#}
-{#    <table class="table">#}
-{#      <tr>#}
-{#        <th>ID</th>#}
-{#        <th>Name</th>#}
-{#        <th>Update</th>#}
-{#        <th>Delete</th>#}
-{#      </tr>#}
-{#      {% for task_type in task_type_list %}#}
-{#        <tr>#}
-{#          <td>{{ task_type.id }}</td>#}
-{#          <td>{{ task_type.name }}</td>#}
-{#          <td><a href={% url "manager:task_type_update" pk=task_type.id %}>UPDATE</a></td>#}
-{#          <td><a href={% url "manager:task_type_delete" pk=task_type.id %}>DELETE</a></td>#}
-{#        </tr>#}
-{#      {% endfor %}#}
-{#    </table>#}
-{#  {% else %}#}
-{#      <p>There are no task types in Manager</p>#}
-{#  {% endif %}#}
-{#{% endblock %}#}
-
-
 {% extends 'layouts/base.html' %}
 
 {% block stylesheets %}{% endblock stylesheets %}

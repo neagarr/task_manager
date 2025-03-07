@@ -1,41 +1,5 @@
-{#{% extends "base.html" %}#}
-{#{% load crispy_forms_filters %}#}
-{##}
-{#{% block content %}#}
-{#  <h1>#}
-{#    Task List#}
-{#    <a style="float: right" href={% url "manager:task_create" %}>+</a>#}
-{#  </h1>#}
-{#  <form method="get" action="" class="form-inline">#}
-{#    {{ search_form|crispy }}#}
-{#    <input type="submit" value="🔍" class="btn btn-secondary">#}
-{#  </form>#}
-{#  <br>#}
-{#  {% if task_list %}#}
-{#    <table class="table">#}
-{#      <tr>#}
-{#        <th>ID</th>#}
-{#        <th>Name</th>#}
-{#        <th>Update</th>#}
-{#        <th>Delete</th>#}
-{#      </tr>#}
-{#      {% for task in task_list %}#}
-{#        <tr>#}
-{#          <td>{{ task.id }}</td>#}
-{#          <td><a href={% url "manager:task_detail" pk=task.id %}>{{ task.name }}</a></td>#}
-{#          <td><a href={% url "manager:task_update" pk=task.id %}>UPDATE</a></td>#}
-{#          <td><a href={% url "manager:task_delete" pk=task.id %}>DELETE</a></td>#}
-{#        </tr>#}
-{#      {% endfor %}#}
-{#    </table>#}
-{#  {% else %}#}
-{#      <p>There are no tasks in Manager</p>#}
-{#  {% endif %}#}
-{#{% endblock %}#}
-
-
 {% extends 'layouts/base.html' %}
-<!-- Specific CSS goes HERE -->
+
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block body_class %} index-page {% endblock body_class %}
