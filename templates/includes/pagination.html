@@ -4,27 +4,27 @@
   
     {% if page_obj.has_previous %}
       <li>
-        <a href="?{% query_transform request page=page_obj.previous_page_number %}" class="page-link" style="border-radius: 20% 0 0 20%"><<</a>
+        <a href="?{% query_transform request page=page_obj.previous_page_number %}" class="page-link bg-gradient-dark" style="border-radius: 20% 0 0 20%"><<</a>
       </li>
     {% endif %}
     
     {% if not page_obj.has_previous %}
       <li>
-        <span class="page-link" style="border-radius: 20% 0 0 20%">{{ page_obj.number }}:{{ paginator.num_pages }}</span>
+        <span class="page-link bg-gradient-dark" style="border-radius: 20% 0 0 20%">{{ page_obj.number }}:{{ paginator.num_pages }}</span>
       </li>
     {% elif not page_obj.has_next %}
       <li>
-      <span class="page-link" style="border-radius: 0 20% 20% 0">{{ page_obj.number }}:{{ paginator.num_pages }}</span>
+      <span class="page-link bg-gradient-dark" style="border-radius: 0 20% 20% 0">{{ page_obj.number }}:{{ paginator.num_pages }}</span>
       </li>
     {% else %}
       <li>
-      <span class="page-link">{{ page_obj.number }}:{{ paginator.num_pages }}</span>
+      <span class="page-link bg-gradient-dark">{{ page_obj.number }}:{{ paginator.num_pages }}</span>
       </li>
     {% endif %}
       
     {% if page_obj.has_next %}
       <li>
-        <a href="?{% query_transform request page=page_obj.next_page_number %}" class="page-link" style="border-radius: 0 20% 20% 0">>></a>
+        <a href="?{% query_transform request page=page_obj.next_page_number %}" class="page-link bg-gradient-dark" style="border-radius: 0 20% 20% 0">>></a>
       </li>
     {% endif %}
   
