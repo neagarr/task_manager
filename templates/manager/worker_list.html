@@ -13,6 +13,7 @@
         <div class="row">
           <div class="col-sm-9 text-center mx-auto">
             <h1 class="text-white pt-3 mt-n5">Workers List</h1>
+            <br>
             <div style="display: flex;">
               <form method="get" action="" class="lead text-white mt-3" style="display: flex;">
                 {{ search_form|crispy }}
@@ -42,13 +43,13 @@
   </header>
 
   {% if worker_list %}
-    <section class="pt-3 pb-4" id="count-stats">
+    <section class="pt-3 pb-4">
     <div class="container">
       <div class="row">
-        <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
+        <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto p-5 blur shadow-blur">
           <div class="row">
             <table class="table">
-              <tr>
+              <tr class="text-primary">
                 <th>ID</th>
                 <th>Username</th>
                 <th>Position</th>

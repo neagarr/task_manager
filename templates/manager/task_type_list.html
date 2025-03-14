@@ -13,6 +13,7 @@
         <div class="row">
           <div class="col-sm-9 text-center mx-auto">
             <h1 class="text-white pt-3 mt-n5">Task Types List</h1>
+            <br>
             <div style="display: flex;">
               <form method="get" action="" class="lead text-white mt-3" style="display: flex;">
                 {{ search_form|crispy }}
@@ -45,14 +46,14 @@
     <section class="pt-3 pb-4" id="count-stats">
     <div class="container">
       <div class="row">
-        <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
+        <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto p-5 blur shadow-blur">
           <div class="row">
             <table class="table">
-              <tr>
+              <tr class="text-primary">
                 <th>ID</th>
                 <th>Name</th>
-                <th>Update</th>
-                <th>Delete</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
               </tr>
               {% for task_type in task_type_list %}
                 <tr>
@@ -71,4 +72,11 @@
   {% else %}
       <p>There are no task types in Manager</p>
   {% endif %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-auto text-center mx-auto">
+          <a class="page-link bg-gradient-secondary text-purple" style="border-radius: 10px 10px 10px 10px" href={% url "manager:task_type_create" %}>ADD NEW</a>
+      </div>
+    </div>
+  </div>
 {% endblock content %}

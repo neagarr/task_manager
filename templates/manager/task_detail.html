@@ -13,7 +13,6 @@
           <div class="col-sm-9 text-center mx-auto">
             <h1 class="text-white pt-3 mt-n5">{{ task.name }}</h1>
             <br>
-            <br>
             <div style="display: flex;">
               <a class="page-link bg-gradient-dark" style="border-radius: 10px 10px 10px 10px" href={% url "manager:task_update" pk=task.id %}>UPDATE</a>
               <a class="page-link bg-gradient-dark ms-lg-auto" style="border-radius: 10px 10px 10px 10px" href={% url "manager:task_delete" pk=task.id %}>DELETE</a>
@@ -39,7 +38,7 @@
     </div>
   </header>
 
-  <section class="pt-3 pb-4" id="count-stats">
+  <section class="pt-3 pb-4">
     <div class="container">
       <div class="row">
         <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
@@ -153,7 +152,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-auto text-center mx-auto">
-          <a class="page-link bg-gradient-secondary text-white" style="border-radius: 10px 10px 10px 10px" href={% url "manager:task_list" %}>BACK</a>
+          <a class="page-link bg-gradient-secondary text-purple" style="border-radius: 10px 10px 10px 10px" href={% url "manager:task_list" %}>BACK</a>
       </div>
     </div>
   </div>
