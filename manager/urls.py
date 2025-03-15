@@ -31,12 +31,12 @@ urlpatterns = [
     path(
         "task_types/<int:pk>/update/",
         TaskTypeUpdateView.as_view(),
-        name="task_type_update"
+        name="task_type_update",
     ),
     path(
         "task_types/<int:pk>/delete/",
         TaskTypeDeleteView.as_view(),
-        name="task_type_delete"
+        name="task_type_delete",
     ),
     path("tasks/", TaskListView.as_view(), name="task_list"),
     path("tasks/<int:pk>/", TaskDetailView.as_view(), name="task_detail"),
@@ -64,12 +64,12 @@ urlpatterns = [
     path(
         "positions/<int:pk>/update/",
         PositionUpdateView.as_view(),
-        name="position_update"
+        name="position_update",
     ),
     path(
         "positions/<int:pk>/delete/",
         PositionDeleteView.as_view(),
-        name="position_delete"
+        name="position_delete",
     ),
     path("workers/", WorkerListView.as_view(), name="worker_list"),
     path(

@@ -32,5 +32,5 @@ class SearchForm(forms.Form):
         required=False,
         max_length=255,
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Search"})
+        widget=forms.TextInput(attrs={"placeholder": "Search"}),
     )

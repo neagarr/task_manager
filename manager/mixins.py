@@ -5,9 +5,7 @@ class ContextMixin:
     def get_context_data_mixin(self, context):
         title = self.request.GET.get("title", "")
         context["title"] = title
-        context["search_form"] = SearchForm(
-            initial={"title": title}
-        )
+        context["search_form"] = SearchForm(initial={"title": title})
         return context
 
 

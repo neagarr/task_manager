@@ -179,8 +179,12 @@ class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
 def register(request):
     if request.method == "GET":
         form = WorkerRegistrationForm()
-        return render(request, "manager/worker_form.html", {'form': form})
-    if request.method == 'POST':
+        return render(
+            request,
+            "manager/worker_form.html",
+            {"form": form}
+        )
+    if request.method == "POST":
         form = WorkerRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
@@ -190,4 +194,8 @@ def register(request):
             login(request, user)
             return redirect("manager:index")
         else:
-            return render(request, "manager/worker_form.html", {'form': form})
+            return render(
+                request,
+                "manager/worker_form.html",
+                {"form": form}
+            )

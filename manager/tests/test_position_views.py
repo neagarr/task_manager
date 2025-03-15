@@ -19,7 +19,9 @@ class PrivatePositionTest(TestCase):
             username="test_username",
             password="testpassword",
         )
-        self.position = Position.objects.create(name="Test Position",)
+        self.position = Position.objects.create(
+            name="Test Position",
+        )
         self.client.force_login(self.user)
 
     def test_retrieve_position_list(self):
@@ -43,12 +45,10 @@ class PrivatePositionTest(TestCase):
         position_id = self.position.id
         form_data = {"name": "Test Update"}
         self.client.post(
-            reverse("manager:position_update", args=[position_id]),
-            form_data
+            reverse("manager:position_update", args=[position_id]), form_data
         )
         self.assertEqual(
-            Position.objects.get(id=position_id).name,
-            form_data["name"]
+            Position.objects.get(id=position_id).name, form_data["name"]
         )
 
     def test_delete_position(self):

@@ -20,7 +20,9 @@ class PrivateTaskTypeTest(TestCase):
             username="test_username",
             password="testpassword",
         )
-        self.task_type = TaskType.objects.create(name="Test Task Type", )
+        self.task_type = TaskType.objects.create(
+            name="Test Task Type",
+        )
         self.client.force_login(self.user)
 
     def test_retrieve_task_type_list(self):
@@ -47,8 +49,7 @@ class PrivateTaskTypeTest(TestCase):
             form_data
         )
         self.assertEqual(
-            TaskType.objects.get(id=task_type_id).name,
-            form_data["name"]
+            TaskType.objects.get(id=task_type_id).name, form_data["name"]
         )
 
     def test_delete_task_type(self):

@@ -37,8 +37,7 @@ class FormTests(TestCase):
         form = TaskForm(data=form_data)
         self.assertTrue(form.is_valid())
         self.assertEqual(
-            dict(form.cleaned_data["assignees"]),
-            dict(form_data["assignees"])
+            dict(form.cleaned_data["assignees"]), dict(form_data["assignees"])
         )
         del form.cleaned_data["assignees"]
         del form_data["assignees"]

@@ -26,7 +26,7 @@ class ModelTests(TestCase):
         self.assertEqual(
             str(worker),
             f"{worker.position}: {worker.username} "
-            f"({worker.first_name} {worker.last_name})"
+            f"({worker.first_name} {worker.last_name})",
         )
 
     def test_create_worker_with_position(self):
@@ -34,9 +34,7 @@ class ModelTests(TestCase):
         position = Position.objects.create(name="test_position")
         password = "12345jjh"
         worker = get_user_model().objects.create_user(
-            username=username,
-            position=position,
-            password=password
+            username=username, position=position, password=password
         )
         self.assertEqual(worker.username, username)
         self.assertEqual(worker.position, position)
