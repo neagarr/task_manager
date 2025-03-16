@@ -1,4 +1,8 @@
-![Logo of the project](/static/assets/img/favicon1.jpg)
+add site adress for try <br>
+add host in settings after deploying <br>
+add login and password for try
+
+![Logo of the project](/static/assets/img/favicon.png)
 
 # Task Flow Manager
 > Additional information or tagline
