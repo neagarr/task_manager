@@ -1,6 +1,4 @@
-add site adress for try <br>
 add host in settings after deploying <br>
-add login and password for try
 
 ![Logo of the project](/static/assets/img/favicon.png)
 
@@ -9,6 +7,15 @@ add login and password for try
 
 This is my first Django project.<br>
 It is designed to organize workflows in development teams to speed up and simplify development by creating, assigning and controlling tasks.
+
+
+## Lets visit
+
+https://tfs-manager.onrender.com/
+
+Register on the site or use: <br>
+> Login: user_admin1 <br>
+Password: qwerty1az
 
 ## Installing / Getting started
 
