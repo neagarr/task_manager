@@ -1,5 +1,3 @@
-add host in settings after deploying <br>
-
 ![Logo of the project](/static/assets/img/favicon.png)
 
 # Task Flow Manager
