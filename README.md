@@ -32,7 +32,7 @@ python manage.py runserver
 ## Features
 
 What's all the bells and whistles this project can perform?
-* Powerful admin panel for advanced manging
+* Powerful admin panel for advanced managing
 * Authentication functionality for Worker|User
 * Managing task, position, task type directly from website interface
 
