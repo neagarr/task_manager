@@ -1,0 +1,83 @@
+{% extends 'layouts/base.html' %}
+
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <header class="header-2">
+    <div class="page-header section-height-75 relative" style="background-image: url('/static/assets/img/curved-images/curved.jpg')">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-9 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n5">Workers List</h1>
+            <br>
+            <div style="display: flex;">
+              <form method="get" action="" class="lead text-white mt-3" style="display: flex;">
+                {{ search_form|crispy }}
+                <input type="submit" value="🔍" class="btn bg-gradient-faded-dark">
+              </form>
+              <p class="nav-item ms-lg-auto" style="">{% include "includes/pagination.html" %}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="position-absolute w-100 z-index-1 bottom-0">
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
+          <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+          </defs>
+          <g class="moving-waves">
+            <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40" />
+            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)" />
+            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)" />
+            <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)" />
+            <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
+            <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,0.95" />
+          </g>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  {% if worker_list %}
+    <section class="pt-3 pb-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto p-5 blur shadow-blur">
+          <div class="row">
+            <table class="table">
+              <tr class="text-primary">
+                <th>ID</th>
+                <th>Username</th>
+                <th>Position</th>
+                <th>Tasks</th>
+              </tr>
+              {% for worker in worker_list %}
+                <tr>
+                  <td>{{ worker.id }}</td>
+                  <td><a href="{% url 'manager:worker_detail' worker.id %}">{{ worker.username }}</a></td>
+                  <td>{{worker.position}}</td>
+                  <td>
+                    {% if worker.tasks.all %}
+                      <ol>
+                        {% for task in worker.tasks.all %}
+                          <li>
+                            <a href="{% url 'manager:task_detail' task.id %}">{{ task.name }}</a>
+                          </li>
+                        {% empty %}
+                          <p>No tasks for this worker!</p>
+                        {% endfor %}
+                      </ol>
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+  {% else %}
+      <p>There are no workers in Manager</p>
+  {% endif %}
+{% endblock content %}
