@@ -8,6 +8,7 @@ It is designed to organize workflows in development teams to speed up and simpli
 
 
 ## Lets visit
+Attention! The first time you start the service online (link bellow), it may take a little longer than usual due to the nature of free hosting and servers.
 
 https://tfs-manager.onrender.com/
 
